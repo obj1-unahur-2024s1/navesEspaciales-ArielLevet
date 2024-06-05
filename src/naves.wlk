@@ -81,6 +81,11 @@ class NaveDePasajeros inherits NaveEspacial{
 	method descargarComida(cuanto){racionesDeComida = 0.max(racionesDeComida - cuanto)}
 	method descargarBebida(cuanto){racionesDeBebida = 0.max(racionesDeBebida - cuanto)}
 	
+	method servirComida(cuanto){
+		comidaServida += cuanto.min(racionesDeComida)
+		self.descargarComida(cuanto)
+	}
+	
 	override method prepararViaje() {
 		super()
 		self.cargarComida(4 * cantidadDePasajeros)
@@ -88,11 +93,6 @@ class NaveDePasajeros inherits NaveEspacial{
 		self.acercarseUnPocoAlSol() //lookup method
 	}
 	override method adicionalTranquilidad() {return true}
-	
-	method servirComida(cuanto){
-		self.descargarComida(cuanto)
-		comidaServida += cuanto.min(racionesDeComida)
-	}
 	
 	method servirBebida(cuanto){
 		self.descargarBebida(cuanto)
